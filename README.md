@@ -1,3 +1,2 @@
 # board-games-project
-Idk for now 
-pls give me some time, I'll do it 
+Analyzing and ranking board games based on user ratings and reviews from BoardGameGeek
