@@ -14,7 +14,7 @@ for column in columns_to_drop:
 
 print("Cleaned columns:", df.columns)
 # Save the cleaned dataset
-df.to_csv("board-games-project/data/cleaned_review_of_games.csv", index=False)
+df.to_csv("data/cleaned_review_of_games.csv", index=False)
 print("Cleaned dataset saved!")
 
 #need to clean the comments one.
@@ -24,7 +24,7 @@ comments_df = pd.read_csv("game_dataset/comments_on_games.csv")
 print(comments_df.head())
 
 
-columns_to_drop = ['Unnamed: 0']
+columns_to_drop = ['Unnamed: 0', 'comment']
 for column in columns_to_drop:
     if column in comments_df.columns:
         comments_df = comments_df.drop(columns=[column])
