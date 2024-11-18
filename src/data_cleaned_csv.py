@@ -14,7 +14,7 @@ for column in columns_to_drop:
 
 print("Cleaned columns:", df.columns)
 # Save the cleaned dataset
-df.to_csv("data/cleaned_review_of_games.csv", index=False)
+df.to_csv("board-games-project/data/cleaned_review_of_games.csv", index=False)
 print("Cleaned dataset saved!")
 
 #need to clean the comments one.
