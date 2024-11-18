@@ -13,7 +13,7 @@ reviews_df, comments_df = load_datasets(reviews_path, comments_path)
 
 # Calculate global average rating and minimum votes threshold
 global_avg = np.mean(reviews_df['Average'])  # Global average rating
-min_votes = int(np.percentile(reviews_df['Users rated'], 50))  # Median of votes (50th percentile)
+min_votes = int(np.mean(reviews_df['Users rated']))  # Mean
 print(f"Global Average: {global_avg}, Minimum Votes: {min_votes}")
 
 # Calculate Custom Bayesian Average
