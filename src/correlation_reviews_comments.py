@@ -19,8 +19,8 @@ comments_count = comments_df.groupby('name').size().reset_index(name='Number of 
 merged_df = pd.merge(reviews_df, comments_count, on='name', how='inner')
 
 # Calculate global average and minimum votes
-global_avg = np.mean(reviews_df['Average'])
-min_votes = int(np.mean(reviews_df['Users rated']))  # Use mean
+global_avg = round((np.mean(reviews_df['Average'])),2)  # Global average rating
+min_votes = int(np.mean(reviews_df['Users rated']))  # Mean
 
 # Calculate Custom Bayesian Average
 merged_df['Custom Bayesian Average'] = calculate_custom_bayesian(

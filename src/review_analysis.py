@@ -11,8 +11,7 @@ comments_path = "game_dataset/cleaned_comments_on_games.csv"
 # Load datasets
 reviews_df, comments_df = load_datasets(reviews_path, comments_path)
 
-# Calculate global average rating and minimum votes threshold
-global_avg = np.mean(reviews_df['Average'])  # Global average rating
+global_avg = round((np.mean(reviews_df['Average'])),2)  # Global average rating
 min_votes = int(np.mean(reviews_df['Users rated']))  # Mean
 print(f"Global Average: {global_avg}, Minimum Votes: {min_votes}")
 
@@ -32,23 +31,26 @@ print(top_10_average[['Name', 'Average', 'Users rated']])
 print("\nTop 10 Games by Custom Bayesian Average:")
 print(top_10_bayesian[['Name', 'Custom Bayesian Average', 'Users rated']])
 
-
 # Prepare top 10 by Average
-top_10_average = reviews_df.sort_values(by='Average', ascending=False).head(10)
-top_10_average['Ranking Type'] = 'Top 10 by Average'
+top_10_average = reviews_df.sort_values(by='Average', ascending=False).head(10)[['Name']]
+top_10_average['Rank (Average)'] = range(1, 11)
 
 # Prepare top 10 by Custom Bayesian Average
-top_10_bayesian = reviews_df.sort_values(by='Custom Bayesian Average', ascending=False).head(10)
-top_10_bayesian['Ranking Type'] = 'Top 10 by Custom Bayesian Average'
+top_10_bayesian = reviews_df.sort_values(by='Custom Bayesian Average', ascending=False).head(10)[['Name']]
+top_10_bayesian['Rank (Bayesian)'] = range(1, 11)
 
-# Combine both into a single DataFrame for comparison
-comparison_table = pd.concat([top_10_average, top_10_bayesian])
+# Reset indices to ensure alignment for concatenation
+top_10_average.reset_index(drop=True, inplace=True)
+top_10_bayesian.reset_index(drop=True, inplace=True)
 
-# Select relevant columns
-comparison_table = comparison_table[['Name', 'Ranking Type', 'Average', 'Custom Bayesian Average', 'Users rated']]
+# Combine into a single table for side-by-side comparison
+comparison_table = pd.concat([top_10_average, top_10_bayesian], axis=1)
+
+# Update column names for clarity
+comparison_table.columns = ['Name (Average)', 'Rank (Average)', 'Name (Bayesian)', 'Rank (Bayesian)']
 
 # Display the comparison table
-print("\nComparison Table: Top 10 by Average vs Top 10 by Custom Bayesian Average")
+print("\nSide-by-Side Comparison with Rankings (Name and Rank)")
 print(comparison_table)
 
 
